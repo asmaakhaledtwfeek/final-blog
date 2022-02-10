@@ -4,8 +4,10 @@ import { Container,Row,Col,Spinner} from 'react-bootstrap';
 import Post from './post';
 import SinglePost from './singlePost';
 import Loader from '../layout/loader';
-
 export class posts extends Component {
+  constructor(props) {
+    super(props);
+}
   state={
     posts:[],
     showModel:false,
@@ -13,9 +15,7 @@ export class posts extends Component {
   }
   componentDidMount(){
     axios.get("https://jsonplaceholder.typicode.com/posts").then(res=>{
-     // console.log(Date);
      this.setState({posts:res.data});
-    console.log(this.state.posts);
   });
   }
   renderPosts=()=>{
@@ -49,8 +49,7 @@ export class posts extends Component {
         <Col><h2 className='h3 text-primary border-bottom pb-3 mb-4'>Latest Posts</h2></Col>
       </Row>
       <Row>{this.renderPosts()}</Row>
-      < SinglePost showModel={this.state.showModel} closeModelHandlar={this.closeModelHandlar} 
-      id={this.state.currentId}/>
+    
   </Container>
   );}
 }

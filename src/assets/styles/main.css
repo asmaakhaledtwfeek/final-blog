@@ -6,7 +6,7 @@
 
 body {
   font-family: "roboto", sans-serif;
-  font-family: ;
+  
 }
 
 .head {
@@ -23,4 +23,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.nav-link.active{
+  color: #0ea36a !important;
 }

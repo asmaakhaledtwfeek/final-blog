@@ -1,38 +1,41 @@
 import React, { Component } from 'react';
-import {Modal,Button} from 'react-bootstrap';
+import {col, Container, Row} from 'react-bootstrap';
 import axios from 'axios';
 import Loader from '../layout/loader';
+import Head from './head';
+
 
 export class singlePost extends Component {
+  
     state={
         post:null,
     }
+ 
+   componentDidMount(){
+     console.log(this.props)
+   }
     componentDidUpdate(prevProps){
-        if(this.props.id && this.props.id!==prevProps.id){
+    
+            if(this.props.id && this.props.id!==prevProps.id){
         axios.get("https://jsonplaceholder.typicode.com/posts/"+this.props.id).then(res=>{
-            console.log(res.data);
+           // console.log(res.data);
             this.setState({post:res.data})
         })}
     }
+   
     renderPost=()=>{
         if(this.state.post){
             return(
-                <Modal aria-labelledby="contained-modal-title-vcenter" size='lg'show={this.props.showModel}
-                centered
-                onHide={this.props.closeModelHandlar}
-                animation={false}>
-                <Modal.Header closeButton >
-                  <Modal.Title id="contained-modal-title-vcenter">
-                    {this.state.post.title}
-                  </Modal.Title>
-                </Modal.Header>
-                <Modal.Body className="show-grid">
-                  <p>{this.state.post.body}</p>    
-                </Modal.Body>
-                <Modal.Footer>
-                  <Button onClick={this.props.closeModelHandlar} >Close</Button>
-                </Modal.Footer>
-              </Modal> 
+              <>
+              <Head title= {this.state.post.title}/>
+              <Container>
+                <Row>
+                  <col>  <p>{this.state.post.body}</p> </col>
+
+  
+                </Row>
+              </Container>
+              </>  
             );
  }else{ return(
         <Loader/>   
@@ -46,5 +49,5 @@ export class singlePost extends Component {
     );
   }
 }
-
+//{this.state.post.title}
 export default singlePost;
